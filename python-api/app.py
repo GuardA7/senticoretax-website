@@ -10,7 +10,9 @@ from services.preprocessing import (
 
 from services.prediction import (
     predict_nb,
-    predict_svm
+    predict_svm,
+    predict_nb_batch,
+    predict_svm_batch
 )
 
 app = Flask(__name__)
@@ -68,6 +70,28 @@ def predict_support_vector_machine():
 
     return jsonify({
         'result': result
+    })
+
+
+@app.route('/predict/nb/batch', methods=['POST'])
+def predict_naive_bayes_batch():
+
+    data = request.get_json() or {}
+    contents = data.get('contents', [])
+
+    return jsonify({
+        'results': predict_nb_batch(contents)
+    })
+
+
+@app.route('/predict/svm/batch', methods=['POST'])
+def predict_support_vector_machine_batch():
+
+    data = request.get_json() or {}
+    contents = data.get('contents', [])
+
+    return jsonify({
+        'results': predict_svm_batch(contents)
     })
 
 # =========================

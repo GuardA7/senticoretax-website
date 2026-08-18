@@ -34,14 +34,16 @@ from services.preprocessing import (
     preprocess_text
 )
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # =========================
 # LOAD DATASET
 # =========================
-xlsx_path = 'dataset/dataset.xlsx'
+xlsx_path = os.path.join(BASE_DIR, 'dataset', 'dataset.xlsx')
 
-xls_path = 'dataset/dataset.xls'
+xls_path = os.path.join(BASE_DIR, 'dataset', 'dataset.xls')
 
-csv_path = 'dataset/dataset.csv'
+csv_path = os.path.join(BASE_DIR, 'dataset', 'dataset.csv')
 
 # =========================
 # CEK FILE
@@ -470,9 +472,11 @@ print(
 # =========================
 # BUAT FOLDER MODEL
 # =========================
-if not os.path.exists('models'):
+models_dir = os.path.join(BASE_DIR, 'models')
 
-    os.makedirs('models')
+if not os.path.exists(models_dir):
+
+    os.makedirs(models_dir)
 
 # =========================
 # SIMPAN MODEL
@@ -482,12 +486,12 @@ if not os.path.exists('models'):
 # =========================
 joblib.dump(
     nb_model,
-    'models/nb_model.pkl'
+    os.path.join(models_dir, 'nb_model.pkl')
 )
 
 joblib.dump(
     svm_model,
-    'models/svm_model.pkl'
+    os.path.join(models_dir, 'svm_model.pkl')
 )
 
 # =========================
@@ -543,7 +547,7 @@ accuracy = {
 }
 
 with open(
-    'models/accuracy.json',
+    os.path.join(models_dir, 'accuracy.json'),
     'w'
 ) as f:
 
@@ -568,7 +572,7 @@ misclassified = {
 }
 
 with open(
-    'models/misclassified.json',
+    os.path.join(models_dir, 'misclassified.json'),
     'w',
     encoding='utf-8'
 ) as f:

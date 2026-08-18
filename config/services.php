@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'flask_api' => [
+        'url' => env('FLASK_API_URL', 'http://127.0.0.1:5000'),
+        'verify_ssl' => env('FLASK_API_VERIFY_SSL', true),
+    ],
+
 ];

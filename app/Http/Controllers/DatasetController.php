@@ -19,9 +19,7 @@ class DatasetController extends Controller
         // =========================
         // FOLDER DATASET PYTHON
         // =========================
-        $destination = base_path(
-            '../python-api/dataset'
-        );
+        $destination = base_path('python-api/dataset');
 
         // =========================
         // BUAT FOLDER
@@ -85,12 +83,15 @@ class DatasetController extends Controller
         // =========================
         // AUTO PREPROCESSING
         // =========================
-        pclose(
-            popen(
-                'start /B python ../python-api/preprocess_dataset.py',
-                'r'
-            )
+        $pythonScript = escapeshellarg(
+            base_path('python-api/preprocess_dataset.py')
         );
+
+        $command = PHP_OS_FAMILY === 'Windows'
+            ? 'start /B python ' . $pythonScript
+            : 'python3 ' . $pythonScript . ' > /dev/null 2>&1 &';
+
+        pclose(popen($command, 'r'));
 
         return redirect()
             ->route('dashboard')

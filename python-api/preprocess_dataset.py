@@ -4,14 +4,16 @@ import pandas as pd
 
 from services.preprocessing import preprocess_detail
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # =========================
 # PATH DATASET
 # =========================
-xlsx_path = 'dataset/dataset.xlsx'
+xlsx_path = os.path.join(BASE_DIR, 'dataset', 'dataset.xlsx')
 
-xls_path = 'dataset/dataset.xls'
+xls_path = os.path.join(BASE_DIR, 'dataset', 'dataset.xls')
 
-csv_path = 'dataset/dataset.csv'
+csv_path = os.path.join(BASE_DIR, 'dataset', 'dataset.csv')
 
 # =========================
 # LOAD DATASET
@@ -125,7 +127,7 @@ for _, row in df.iterrows():
 # SIMPAN JSON
 # =========================
 with open(
-    'dataset/preprocessing_result.json',
+    os.path.join(BASE_DIR, 'dataset', 'preprocessing_result.json'),
     'w',
     encoding='utf-8'
 ) as f:

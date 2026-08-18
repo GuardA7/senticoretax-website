@@ -9,8 +9,7 @@ class PreprocessingController extends Controller
         // =========================
         // PATH JSON
         // =========================
-        $path =
-            'C:/senticoretax/python-api/dataset/preprocessing_result.json';
+        $path = base_path('python-api/dataset/preprocessing_result.json');
 
         $results = [];
 

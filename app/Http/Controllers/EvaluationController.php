@@ -9,15 +9,19 @@ class EvaluationController extends Controller
         // =========================
         // DEFAULT
         // =========================
-        $nbMetrics = [];
+        $nbMetrics = [
+            'accuracy' => 0,
+            'precision' => 0,
+            'recall' => 0,
+            'f1_score' => 0,
+        ];
 
-        $svmMetrics = [];
+        $svmMetrics = $nbMetrics;
 
         // =========================
         // FILE AKURASI
         // =========================
-        $path =
-            'C:/senticoretax/python-api/models/accuracy.json';
+        $path = base_path('python-api/models/accuracy.json');
 
         // =========================
         // CEK FILE

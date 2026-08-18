@@ -20,6 +20,8 @@
 /public/storage
 /storage/*.key
 /storage/pail
+/python-api/__pycache__/
+/python-api/services/__pycache__/
 /vendor
 _ide_helper.php
 Homestead.json

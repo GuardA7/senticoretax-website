@@ -16,7 +16,12 @@ class SentimentController extends Controller
     // (disamakan dengan yang dibaca DashboardController)
     // =========================
     private $datasetPath =
-        'C:/senticoretax/python-api/dataset/dataset.xlsx';
+        '';
+
+    public function __construct()
+    {
+        $this->datasetPath = base_path('python-api/dataset/dataset.xlsx');
+    }
 
     // =========================
     // NAIVE BAYES
@@ -29,8 +34,7 @@ class SentimentController extends Controller
 
         $results = [];
 
-        $accuracyPath =
-            'C:/senticoretax/python-api/models/accuracy.json';
+        $accuracyPath = base_path('python-api/models/accuracy.json');
 
         if (file_exists($accuracyPath)) {
 
@@ -57,16 +61,14 @@ class SentimentController extends Controller
 
             array_shift($rows);
 
-            foreach (array_slice($rows, 0, 100) as $row) {
+            $sampleRows = array_slice($rows, 0, 100);
+            $contents = array_map(fn ($row) => $row[1] ?? '', $sampleRows);
+            $predictions = $flask->predictNBBatch($contents);
 
-                $content = $row[1] ?? '';
-
-                $prediction =
-                    $flask->predictNB($content);
-
+            foreach ($contents as $index => $content) {
                 $results[] = [
                     'content' => $content,
-                    'result' => $prediction['result']
+                    'result' => $predictions[$index] ?? null
                 ];
             }
         }
@@ -88,8 +90,7 @@ class SentimentController extends Controller
 
         $results = [];
 
-        $accuracyPath =
-            'C:/senticoretax/python-api/models/accuracy.json';
+        $accuracyPath = base_path('python-api/models/accuracy.json');
 
         if (file_exists($accuracyPath)) {
 
@@ -116,16 +117,14 @@ class SentimentController extends Controller
 
             array_shift($rows);
 
-            foreach (array_slice($rows, 0, 100) as $row) {
+            $sampleRows = array_slice($rows, 0, 100);
+            $contents = array_map(fn ($row) => $row[1] ?? '', $sampleRows);
+            $predictions = $flask->predictSVMBatch($contents);
 
-                $content = $row[1] ?? '';
-
-                $prediction =
-                    $flask->predictSVM($content);
-
+            foreach ($contents as $index => $content) {
                 $results[] = [
                     'content' => $content,
-                    'result' => $prediction['result']
+                    'result' => $predictions[$index] ?? null
                 ];
             }
         }
@@ -159,6 +158,8 @@ class SentimentController extends Controller
             $svm = $flask->predictSVM($content);
 
         } catch (\Exception $e) {
+
+            report($e);
 
             // =========================
             // RESPON UNTUK REQUEST AJAX

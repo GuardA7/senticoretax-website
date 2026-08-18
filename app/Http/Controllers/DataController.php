@@ -25,22 +25,22 @@ class DataController extends Controller
             // AKURASI MODEL
             // (dibaca DashboardController untuk nbAccuracy & svmAccuracy)
             // =========================
-            'C:/senticoretax/python-api/models/accuracy.json',
+            base_path('python-api/models/accuracy.json'),
 
             // =========================
             // DATASET
             // Path disamakan persis dengan yang dibaca DashboardController,
             // dan mencakup ketiga kemungkinan format (xlsx, xls, csv)
             // =========================
-            'C:/senticoretax/python-api/dataset/dataset.xlsx',
-            'C:/senticoretax/python-api/dataset/dataset.xls',
-            'C:/senticoretax/python-api/dataset/dataset.csv',
+            base_path('python-api/dataset/dataset.xlsx'),
+            base_path('python-api/dataset/dataset.xls'),
+            base_path('python-api/dataset/dataset.csv'),
 
             // =========================
             // MODEL AI
             // =========================
-            'C:/senticoretax/python-api/models/nb_model.pkl',
-            'C:/senticoretax/python-api/models/svm_model.pkl',
+            base_path('python-api/models/nb_model.pkl'),
+            base_path('python-api/models/svm_model.pkl'),
 
         ];
 

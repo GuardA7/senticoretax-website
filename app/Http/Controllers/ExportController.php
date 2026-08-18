@@ -13,8 +13,7 @@ class ExportController extends Controller
         // =========================
         // FILE PREPROCESSING
         // =========================
-        $path =
-            'C:/senticoretax/python-api/dataset/preprocessing_result.json';
+        $path = base_path('python-api/dataset/preprocessing_result.json');
 
         // =========================
         // CEK FILE
