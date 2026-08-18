@@ -435,7 +435,7 @@
         <!-- FORM -->
         <form
             id="manualInputForm"
-            action="{{ route('manual.input') }}"
+            action="{{ route('manual.input', [], false) }}"
             method="POST"
             class="p-6"
         >
