@@ -50,7 +50,7 @@ KETERANGAN KATEGORI
         Keterangan Kategori Skor Rata-rata
     </h3>
 
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+    <div class="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-5 gap-3">
 
         <div class="flex items-center gap-2">
             <span class="w-3 h-3 rounded-full bg-red-500 shrink-0"></span>

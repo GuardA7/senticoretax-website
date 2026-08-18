@@ -15,6 +15,10 @@
         .sidebar-gradient { background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); }
         .premium-shadow { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
         .premium-shadow-hover:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04); }
+        @media (max-width: 767px) {
+            .mobile-sidebar { transform: translateX(-100%); transition: transform 180ms ease; }
+            .mobile-sidebar.is-open { transform: translateX(0); }
+        }
     </style>
 </head>
 <!-- LOADING OVERLAY -->
@@ -35,7 +39,9 @@
 <body class="font-sans text-gray-700">
 
 <!-- Sidebar -->
-<aside class="fixed left-0 h-screen w-72 sidebar-gradient flex flex-col py-6 px-4 z-50">
+<div id="sidebarBackdrop" class="fixed inset-0 bg-slate-950/50 z-40 hidden md:hidden" onclick="toggleSidebar(false)"></div>
+
+<aside id="appSidebar" class="fixed left-0 top-0 h-screen w-72 sidebar-gradient flex flex-col py-6 px-4 z-50 mobile-sidebar md:translate-x-0">
     <div class="flex items-center gap-3 px-2 mb-8">
         <div class="w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center">
             <span class="material-symbols-outlined text-white">psychology</span>
@@ -108,8 +114,19 @@
     </div>
 </aside>
 
+<!-- Mobile Header -->
+<header class="sticky top-0 z-30 flex items-center justify-between bg-slate-900 px-4 py-3 text-white md:hidden">
+    <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-blue-400">psychology</span>
+        <span class="font-semibold">Coretax</span>
+    </div>
+    <button type="button" aria-label="Buka menu" onclick="toggleSidebar(true)" class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800">
+        <span class="material-symbols-outlined">menu</span>
+    </button>
+</header>
+
 <!-- Main Content -->
-<main class="ml-72 min-h-screen p-6">
+<main class="min-h-screen p-3 sm:p-6 md:ml-72">
     <div class="max-w-7xl mx-auto">
         @if(session('success'))
             <div class="mb-4 p-3 bg-green-50 border border-green-300 rounded-lg text-green-700 text-sm">
@@ -129,7 +146,7 @@
 
 <!-- Modal Upload -->
 <div id="uploadModal" class="fixed inset-0 bg-black/40 z-50 hidden items-center justify-center">
-    <div class="bg-white rounded-xl w-full max-w-md p-6 border border-gray-200 shadow-xl">
+    <div class="max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] overflow-y-auto rounded-xl bg-white p-4 sm:p-6 max-w-md border border-gray-200 shadow-xl">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-xl font-semibold text-gray-900">Upload Dataset</h3>
             <button onclick="closeUploadModal()" class="text-gray-400 hover:text-gray-700">
@@ -195,7 +212,7 @@
 
 <!-- Modal Manual Input -->
 <div id="manualModal" class="fixed inset-0 bg-black/40 z-50 hidden items-center justify-center">
-    <div class="bg-white rounded-xl w-full max-w-md p-6 border border-gray-200 shadow-xl">
+    <div class="max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] overflow-y-auto rounded-xl bg-white p-4 sm:p-6 max-w-md border border-gray-200 shadow-xl">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-xl font-semibold text-gray-900">Input Ulasan Manual</h3>
             <button onclick="closeManualModal()" class="text-gray-400 hover:text-gray-700">
@@ -280,7 +297,16 @@
 </div>
 
 <script>
+    function toggleSidebar(open) {
+        const sidebar = document.getElementById('appSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+
+        sidebar.classList.toggle('is-open', open);
+        backdrop.classList.toggle('hidden', !open);
+    }
+
     function openUploadModal() {
+        toggleSidebar(false);
         document.getElementById('uploadModal').classList.remove('hidden');
         document.getElementById('uploadModal').classList.add('flex');
     }
@@ -303,6 +329,7 @@
         }
     }
     function openManualModal() {
+        toggleSidebar(false);
         document.getElementById('manualModal').classList.remove('hidden');
         document.getElementById('manualModal').classList.add('flex');
     }

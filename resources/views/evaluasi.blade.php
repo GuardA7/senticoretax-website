@@ -45,7 +45,7 @@
         </div>
 
         <!-- Metrics -->
-        <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
 
             <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-3 text-center">
                 <p class="text-lg font-bold text-cyan-700">
@@ -76,7 +76,8 @@
             Confusion Matrix
         </h4>
 
-        <table class="w-full text-sm text-center border-separate border-spacing-1">
+        <div class="overflow-x-auto">
+        <table class="min-w-[420px] w-full text-sm text-center border-separate border-spacing-1">
 
             <tr>
 
@@ -114,6 +115,7 @@
             @endforeach
 
         </table>
+        </div>
 
     </div>
 
@@ -148,7 +150,7 @@
         </div>
 
         <!-- Metrics -->
-        <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
 
             <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-3 text-center">
                 <p class="text-lg font-bold text-cyan-700">
@@ -179,7 +181,8 @@
             Confusion Matrix
         </h4>
 
-        <table class="w-full text-sm text-center border-separate border-spacing-1">
+        <div class="overflow-x-auto">
+        <table class="min-w-[420px] w-full text-sm text-center border-separate border-spacing-1">
 
             <tr>
 
@@ -217,6 +220,7 @@
             @endforeach
 
         </table>
+        </div>
 
     </div>
 
